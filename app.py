@@ -54,6 +54,6 @@ def score(data: InputData):
     model_input = np.array([v for k, v in data.dict().items()]).reshape(1, -1)
     probabilities = model.predict_proba(model_input)[0]
     return {
-        'probability_mountains': probabilities[1],  # Probabilidad de preferencia por "montañas"
-        'probability_beaches': probabilities[0]     # Probabilidad de preferencia por "playas"
+        'probability_mountains': float(probabilities[1]),  # Probabilidad completa de preferencia por "montañas"
+        'probability_beaches': float(probabilities[0])     # Probabilidad completa de preferencia por "playas"
     }
