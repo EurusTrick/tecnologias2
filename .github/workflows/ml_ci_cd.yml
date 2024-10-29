@@ -17,9 +17,9 @@ jobs:
       run: pip install -r requirements.txt
 
     - name: download dataset
-      run: wget -O data/mountains_vs_beaches_preferences.csv ${{github.event.client_payload.dataseturl}}
+      run: wget -O ./data/mountains_vs_beaches_preferences.csv ${{github.event.client_payload.dataseturl}}
     - name: cat dataset
-      run: cat data/mountains_vs_beaches_preferences.csv
+      run: cat ./data/mountains_vs_beaches_preferences.csv
 
       
     - name: train model
