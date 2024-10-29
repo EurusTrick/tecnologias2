@@ -45,12 +45,15 @@ class InputData(BaseModel):
     pets: int
     environmental_concerns: int
 
-class OutputData(BaseModel):
-    preference: str  # 'mountains' or 'beaches'
+class ProbabilityOutput(BaseModel):
+    probability_mountains: float
+    probability_beaches: float
 
-@app.post('/score', response_model=OutputData)
+@app.post('/score', response_model=ProbabilityOutput)
 def score(data: InputData):
     model_input = np.array([v for k, v in data.dict().items()]).reshape(1, -1)
-    result = model.predict(model_input)[0]
-    return {'preference': 'mountains' if result == 1 else 'beaches'}
-    
+    probabilities = model.predict_proba(model_input)[0]
+    return {
+        'probability_mountains': probabilities[1],  # Probabilidad de preferencia por "montañas"
+        'probability_beaches': probabilities[0]     # Probabilidad de preferencia por "playas"
+    }
