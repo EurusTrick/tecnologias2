@@ -7,7 +7,7 @@ import pathlib
 from joblib import dump
 
 # Cargar el dataset
-df = pd.read_csv('/home/eurustrick/Escritorio/Nueva carpeta/deploy-ml 2/data/mountains_vs_beaches_preferences.csv')
+df = pd.read_csv('./data/mountains_vs_beaches_preferences.csv')
 
 # Preparar los datos
 X = df.drop('Preference', axis=1)  # 'Preference' es la columna objetivo
@@ -24,7 +24,7 @@ model = RandomForestClassifier(random_state=42)
 model.fit(X_train, y_train)
 
 # Guardar el modelo
-dump(model, '/home/eurustrick/Escritorio/Nueva carpeta/deploy-ml 2/model/mountains_vs_beaches-v1.joblib')
+dump(model, './model/mountains_vs_beaches-v1.joblib')
 
 # Evaluar el modelo
 y_pred = model.predict(X_test)
